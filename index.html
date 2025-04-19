@@ -1,0 +1,599 @@
+<!DOCTYPE html><!-- This site was created in Webflow. https://webflow.com --><!-- Last Published: Mon Apr 14 2025 12:14:25 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="beer-biceps-skill-house-p-de7f7ecd9fbb6.webflow.io" data-wf-page="673ecc1f4357102f364723a9" data-wf-site="65f02985a70b38d810964d03" data-wf-status="1" lang="en" data-wf-locale="en"><head><meta charset="utf-8"/><title>HomePage-web</title><meta content="HomePage-web" property="og:title"/><meta content="HomePage-web" property="twitter:title"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Webflow" name="generator"/><link href="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/css/beer-biceps-skill-house-p-de7f7ecd9fbb6.webflow.65dc254ce.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/><script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Oswald:200,300,400,500,600,700","Sora:100,200,300,regular,500,600,700,800","Titillium Web:200,300,regular,600,700,900","Inter:100,200,300,regular,600,700,800,900","Vujahday Script:regular","DM Sans:100,200,300,regular,500,600,700,800,900"]  }});</script><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/65f182859222431f8ffc13de_IMG_0520%201%20(1)%20(1).png" rel="shortcut icon" type="image/x-icon"/><link href="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/65f18288c5e625d0c4573f07_IMG_0520%201%20(1)%20(2).png" rel="apple-touch-icon"/><style>.w-webflow-badge {
+   display: None !important;
+   visibility: hidden !important;
+}    
+  
+  .button-block-06-2{
+  transform: translate3d(0px, 0px, 0px) scale3d(1,1,1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg) !important;
+    transform-style: none !important;
+  } 
+  .button-block-06-2-copy{
+  transform: translate3d(0px, 0px, 0px) scale3d(1,1,1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg) !important;
+    transform-style: none !important;
+  }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<script>
+$(document).ready(function () {
+  // List of random realistic names with surnames
+  const randomNames = [
+    "Yasar", "Rahul Sharma", "Ananya Gupta", "Rohan Mehta", "Aarav Kapoor",
+    "Priya Verma", "Kavya Iyer", "Aditya Malhotra", "Ishita Desai", "Aryan Joshi",
+    "Nisha Khanna", "Siddharth Bhatia", "Neha Chauhan", "Tanvi Agarwal", "Arjun Nair",
+    "Meera Reddy", "Amit Shukla", "Sneha Pillai", "Raj Yadav", "Pooja Singh",
+    "Varun Mishra", "Shreya Menon", "Krishna Patel", "Tanya Rao", "Akash Goyal"
+  ];
+
+  // List of courses
+  const courses = [
+    "Designing For Clicks", "Video Editing Mastery", "Podcasting101",
+    "Monetising Content Creation", "Instagram101"
+  ];
+
+  // Possible time frames
+  const timeFrames = [
+    "30 Minutes Ago", "45 Minutes Ago", "55 Minutes Ago", "25 Minutes Ago",
+    "1 Hour Ago", "2 Hours Ago", "3 Hours Ago", "4 Hours Ago", "5 Hours Ago", "6 Hours Ago"
+  ];
+
+  // Select all elements with the IDs 'nameChange', 'otherFade', and 'otherTextCr'
+  const $nameChange = $('#nameChange');
+  const $otherFade = $('#otherFade');
+  const $otherTextCr = $('#otherTextCr');
+  
+  // Function to generate and display the random message
+  function assignRandomMessage() {
+    // Randomly pick a name, course, and time
+    const randomName = randomNames[Math.floor(Math.random() * randomNames.length)];
+    const randomCourse = courses[Math.floor(Math.random() * courses.length)];
+    const randomTime = timeFrames[Math.floor(Math.random() * timeFrames.length)];
+
+    const message = `${randomName} joined ${randomCourse} ${randomTime}`;
+
+    // Update the elements with the generated message
+    [$nameChange, $otherFade, $otherTextCr].forEach($el => {
+      $el.removeClass('fade'); // Reset animation
+      $el[0].offsetHeight; // Force reflow
+      $el.text(message); // Set new message
+      $el.addClass('fade'); // Trigger fade animation
+    });
+  }
+
+  // Initial message display
+  assignRandomMessage();
+
+  // Update message every 10 seconds
+  setInterval(assignRandomMessage, 10000);
+});
+
+$(document).ready(function () {
+  function animateCounter({ id, target, duration }) {
+    const element = document.getElementById(id);
+    let start = 0;
+    const frameRate = 60;
+    const totalFrames = Math.round(duration / (1000 / frameRate));
+    const increment = target / totalFrames;
+
+    function update() {
+      start += increment;
+      if (start >= target) {
+        element.innerText = formatNumber(target);
+      } else {
+        element.innerText = formatNumber(Math.floor(start));
+        requestAnimationFrame(update);
+      }
+    }
+
+    function formatNumber(num) {
+      if (num >= 1000) {
+        const k = Math.floor(num / 1000); // Remove decimal
+        return `${k}K+`;
+      }
+      return num.toString();
+    }
+
+    update();
+  }
+
+  // Function to handle the count-up animation for large values
+  function countUpAnimation(displayElement, targetNumber, duration) {
+    let startValue = 0;
+    const increment = targetNumber / (duration / 10); // Increment per interval
+
+    const countUp = setInterval(function () {
+      startValue += increment;
+      if (startValue >= targetNumber) {
+        startValue = targetNumber;
+        clearInterval(countUp);
+      }
+
+      let formattedNumber = '';
+      if (startValue >= 1000000) {
+        const million = startValue / 1000000;
+        formattedNumber = (targetNumber % 1000000 === 0)
+          ? Math.floor(million) + 'M+'
+          : million.toFixed(2) + 'M+';
+      } else if (startValue >= 1000) {
+        const thousand = startValue / 1000;
+        formattedNumber = Math.floor(thousand) + 'K+';
+      } else {
+        formattedNumber = Math.floor(startValue).toString();
+      }
+
+      displayElement.text(formattedNumber);
+    }, 10);
+  }
+
+  // Waypoint for main countUpAnimation counters
+  function createWaypoint(elementId, targetNumber, duration, offset = '75%') {
+    new Waypoint({
+      element: document.getElementById(elementId),
+      handler: function () {
+        countUpAnimation($(`#${elementId}`), targetNumber, duration);
+        this.destroy();
+      },
+      offset: offset
+    });
+  }
+
+  // Waypoint for the animateCounter function (e.g. 20K+)
+  new Waypoint({
+    element: document.getElementById('numberCount20'),
+    handler: function () {
+      animateCounter({ id: 'numberCount20', target: 20000, duration: 3000 });
+      this.destroy();
+    },
+    offset: '75%'
+  });
+
+  // Initialize other counters
+  const counters = [
+    { id: 'numberCount', target: 7040000, duration: 3000 },
+    { id: 'numberCount2', target: 15000000, duration: 3000 },
+    { id: 'numberCount3', target: 130000000, duration: 3000 },
+    { id: 'numberCount4', target: 1000000, duration: 3000 },
+  ];
+
+  counters.forEach(counter => {
+    createWaypoint(counter.id, counter.target, counter.duration);
+  });
+});
+
+
+
+ document.addEventListener("DOMContentLoaded", function () {
+  const targetElements = document.querySelectorAll(
+    "#animated-text1, #animated-text2, #animated-text3, #animated-text4, #animated-text5"
+  );
+  
+ // Create an Intersection Observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Add the "visible" class when the element is in view
+        entry.target.classList.add("visible");
+        // Optional: Unobserve the element after the class is added
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+  
+
+  // Start observing each target element
+  targetElements.forEach((element) => observer.observe(element));
+});
+
+
+
+$(document).ready(function() {
+  // Initially hide all sections with the class 'hide-review'
+  $('.hide-review').hide();
+
+  // When the button with class 'show-review' is clicked
+  $('.show-review').click(function() {
+    // Toggle the visibility of the sections with smooth animation
+    $('.hide-review').slideToggle('slow', function() {
+      // Change button text based on visibility
+      if ($('.hide-review').is(':visible')) {
+        $('.show-review').text('Show Less');
+      } else {
+        $('.show-review').text('Load More');
+      }
+    });
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const playStoreButtons = [
+        document.getElementById('playStore'),
+        document.getElementById('playStoreMb')
+    ];
+
+    const appleStoreButtons = [
+        document.getElementById('appleStore'),
+        document.getElementById('appleStoreMb')
+    ];
+
+    playStoreButtons.forEach(button => {
+        if (button) {
+            button.addEventListener('click', function () {
+                window.location.href = 'https://play.google.com/store/apps/details?id=com.tagmango.beerbiceps';
+            });
+        }
+    });
+
+    appleStoreButtons.forEach(button => {
+        if (button) {
+            button.addEventListener('click', function () {
+                window.location.href = 'https://apps.apple.com/in/app/beerbiceps-skillhouse/id6478582134';
+            });
+        }
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+const redToExp = document.querySelectorAll(".team-slide-wrapper-2");
+redToExp.forEach(i => i.addEventListener("click", function () {
+  window.location.href = "https://www.beerbicepsskillhouse.com/experiences";
+}));
+
+});
+
+</script>
+
+
+
+
+<script>
+     window.clickmagick_cmc = {
+         uid: '193797',
+         hid: '1889269877',
+         cmc_project: 'BeerBiceps SkillHouse Master Website',
+         vid_info: 'on',
+     }
+ </script>
+ <script src='https://cdn.clkmc.com/cmc.js'></script>
+ 
+ <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "q0g88de3j3");
+</script>
+
+
+
+
+</head><body class="over-fl-bd"><section id="trigger-section" class="section-2"><div class="w-layout-blockcontainer container-11 w-container"><div class="navbar-no-shadow"><div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-no-shadow-container-2 w-nav"><div class="container-regular"><div class="navbar-wrapper"><a href="#" class="navbar-brand w-nav-brand"><img width="62" height="Auto" alt="" src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/673ee3a63151dbb525a84988_55bdccdcc69c543d6ffc9aa46d4d9a99.png" loading="lazy" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/673ee3a63151dbb525a84988_55bdccdcc69c543d6ffc9aa46d4d9a99-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/673ee3a63151dbb525a84988_55bdccdcc69c543d6ffc9aa46d4d9a99-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/673ee3a63151dbb525a84988_55bdccdcc69c543d6ffc9aa46d4d9a99.png 842w" sizes="(max-width: 479px) 58vw, 62px"/></a><nav role="navigation" class="nav-menu-wrapper-4 w-nav-menu"><ul role="list" class="nav-menu-2 w-list-unstyled"><li class="list-item-11"><a href="index.html" aria-current="page" class="nav-link-5 w--current">Home</a></li><li><div data-hover="false" data-delay="0" class="nav-dropdown-2 w-dropdown"><div class="nav-dropdown-toggle-2 w-dropdown-toggle"><div class="nav-dropdown-icon-2 tab-none w-icon-dropdown-toggle"></div><div class="text-block-135">Courses</div></div><nav class="nav-dropdown-list-2 shadow-three mobile-shadow-hide w-dropdown-list"><a href="https://design.beerbicepsskillhouse.in/" target="_blank" class="dropdown-link-4 w-dropdown-link">Designing For Clicks</a><a href="video-editing-mastery.html" target="_blank" class="dropdown-link w-dropdown-link">Video Editing Mastery</a><a href="https://www.beerbicepsskillhouse.com/fb" target="_blank" class="dropdown-link-2 w-dropdown-link">Instagram 101</a><a href="https://learn.beerbicepsskillhouse.in/monetize-ig" target="_blank" class="dropdown-link-3 w-dropdown-link">Monetising Content Creation</a><a href="podcasting101.html" target="_blank" class="dropdown-link-4 w-dropdown-link">Podcasting 101</a></nav></div></li><li><a href="experiences.html" class="nav-link-5">Experiences</a></li><li><a href="blogs.html" class="nav-link-5">Blogs</a></li><li><a href="earn-with-us.html" class="nav-link-5">Earn With Us</a></li><li><a href="coming-soon.html" class="nav-link-5">Gamification</a></li><li class="mobile-margin-top-11"><div class="nav-button-wrapper"><a href="mailto:support@beerbicepsskillhouse.com" class="button-primary w-button">Contact Us</a><a href="https://app.beerbiceps.com/" class="button-primary new-btn w-button">Login</a></div></li></ul><div class="div-block-95 ds-none-instant"><h5 class="heading-1452">DOWNLOAD THE APP</h5><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/676d9348314854ee3affa0a8_Separator.png" loading="lazy" alt=""/><div class="div-block-96"><a href="https://play.google.com/store/apps/details?id=com.tagmango.beerbiceps" class="w-inline-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6746babd1dd638f3dec77c73_button-googlePlay.svg" loading="lazy" width="138" alt=""/></a><a href="https://apps.apple.com/in/app/beerbiceps-skillhouse/id6478582134" class="w-inline-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6746babd8afc75af46bfc022_button-apple.svg" loading="lazy" width="138" alt=""/></a></div></div></nav><div class="menu-button w-nav-button"><img loading="lazy" src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6746c9ac4b51a1c9b87576d1_fi_4543046.svg" alt=""/></div></div></div></div></div></div><div id="w-node-_16616843-fc01-30e4-03e9-c1232b4b4c18-364723a9" class="w-layout-layout quick-stack-2 wf-layout-layout"><div class="w-layout-cell cell-5"><div class="div-block-63"><div class="div-block-56 righttoleft"><h5 id="otherFade" class="heading-74"><strong id="nameChange">Rahul enrolled</strong> <span id="otherTextCr">in Instagram 101 course!</span></h5></div></div><h3 class="heading-75">BeerBiceps Skillhouse:</h3><h1 id="animated-text" class="heading-76">Your <span class="text-span-22">One-Stop Shop</span>For Content Creation</h1><div class="div-block-68 mb-none"><div class="lottie-animation" data-w-id="b08992f6-36c2-60a5-55b9-0baa94df700d" data-animation-type="lottie" data-src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674eae9e030ce35fdbabe5d6_animate%203.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="10.04"></div></div></div><div class="w-layout-cell cell-21"><div data-delay="3000" data-animation="slide" class="team-slider-wrapper w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="12" data-duration="2000" data-infinite="true"><div class="mask-2 w-slider-mask"><div class="team-slide-wrapper w-slide"><div class="team-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea2c4178d35f6e7a77_6746ecb21fac4c67a82b0749_card%201.webp" loading="lazy" width="Auto" sizes="(max-width: 1077px) 100vw, 1077px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea2c4178d35f6e7a77_6746ecb21fac4c67a82b0749_card%201-p-500.webp 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea2c4178d35f6e7a77_6746ecb21fac4c67a82b0749_card%201-p-800.webp 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea2c4178d35f6e7a77_6746ecb21fac4c67a82b0749_card%201.webp 1077w" class="team-member-image-two"/><div class="div-block-65"><h6 class="heading-109">Video Editing Mastery</h6><h6 class="heading-110">Learn professional video editing from beginner to pro level. Perfect for aspiring YouTubers, filmmakers &amp; content creators.</h6><a href="video-editing-mastery.html" class="w-inline-block"><div class="div-block-66"><h6 class="heading-111">Learn More</h6><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6746f1e15c41a89af2c3c516_Frame%206.svg" loading="lazy" width="Auto" alt=""/></div></a></div></div></div><div class="team-slide-wrapper w-slide"><div class="team-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea119bcee381fa479f_6746ecb2938fc966dcdbe201_card%202.webp" loading="lazy" width="Auto" sizes="(max-width: 1077px) 100vw, 1077px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea119bcee381fa479f_6746ecb2938fc966dcdbe201_card%202-p-500.webp 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea119bcee381fa479f_6746ecb2938fc966dcdbe201_card%202-p-800.webp 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea119bcee381fa479f_6746ecb2938fc966dcdbe201_card%202.webp 1077w" class="team-member-image-two"/><div class="div-block-65"><h6 class="heading-109">Instagram 101</h6><h6 class="heading-110">Master the strategies to grow your Instagram following and create your personal brand. <br/>‍</h6><a href="old-home.html" class="w-inline-block"><div class="div-block-66"><h6 class="heading-111">Learn More</h6><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6746f1e15c41a89af2c3c516_Frame%206.svg" loading="lazy" width="Auto" alt=""/></div></a></div></div></div><div class="team-slide-wrapper w-slide"><div class="team-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88eaac9d6dda57bba062_6746ecb164acbdbf37476ce2_card%203.webp" loading="lazy" width="Auto" sizes="(max-width: 1077px) 100vw, 1077px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88eaac9d6dda57bba062_6746ecb164acbdbf37476ce2_card%203-p-500.webp 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88eaac9d6dda57bba062_6746ecb164acbdbf37476ce2_card%203-p-800.webp 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88eaac9d6dda57bba062_6746ecb164acbdbf37476ce2_card%203.webp 1077w" class="team-member-image-two"/><div class="div-block-65"><h6 class="heading-109">Podcasting 101</h6><h6 class="heading-110">Discover secrets of successful podcasting from the team behind India&#x27;s no.1 podcast, from content planning to monetization.</h6><a href="podcasting101.html" class="w-inline-block"><div class="div-block-66"><h6 class="heading-111">Learn More</h6><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6746f1e15c41a89af2c3c516_Frame%206.svg" loading="lazy" width="Auto" alt=""/></div></a></div></div></div><div class="team-slide-wrapper w-slide"><div class="team-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea9e7bd6e72d2bf635_6746ecb28afc75af46f0bc58_card%204.webp" loading="lazy" width="Auto" sizes="(max-width: 1077px) 100vw, 1077px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea9e7bd6e72d2bf635_6746ecb28afc75af46f0bc58_card%204-p-500.webp 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea9e7bd6e72d2bf635_6746ecb28afc75af46f0bc58_card%204-p-800.webp 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/677f88ea9e7bd6e72d2bf635_6746ecb28afc75af46f0bc58_card%204.webp 1077w" class="team-member-image-two"/><div class="div-block-65"><h6 class="heading-109">Monetize Content Creation</h6><h6 class="heading-110">Turn your passion into profit &amp; build a consistent source of income from content creation. </h6><a href="https://learn.beerbicepsskillhouse.in/monetize-ig" class="w-inline-block"><div class="div-block-66"><h6 class="heading-111">Learn More</h6><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6746f1e15c41a89af2c3c516_Frame%206.svg" loading="lazy" width="Auto" alt=""/></div></a></div></div></div><div class="team-slide-wrapper w-slide"><div class="team-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67976912cf2d9656607dbcfc_design%20for%20clicks%20card.webp" loading="lazy" width="Auto" sizes="(max-width: 1077px) 100vw, 1077px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67976912cf2d9656607dbcfc_design%20for%20clicks%20card-p-500.webp 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67976912cf2d9656607dbcfc_design%20for%20clicks%20card-p-800.webp 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67976912cf2d9656607dbcfc_design%20for%20clicks%20card.webp 1077w" class="team-member-image-two"/><div class="div-block-65"><h6 class="heading-109"><strong>Designing For Clicks</strong></h6><h6 class="heading-110">Learn to turn your ideas into stunning visuals with AI that make your content stand out and attract more views, clicks, and followers.<br/></h6><a href="https://design.beerbicepsskillhouse.in/" class="w-inline-block"><div class="div-block-66"><h6 class="heading-111">Learn More</h6><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6746f1e15c41a89af2c3c516_Frame%206.svg" loading="lazy" width="Auto" alt=""/></div></a></div></div></div></div><div class="team-slider-arrow w-slider-arrow-left"></div><div class="team-slider-arrow w-slider-arrow-right"></div><div class="team-slider-nav w-slider-nav w-slider-nav-invert w-round"></div></div></div></div><div class="div-block-68 ds-none flx-mb"><div class="lottie-animation" data-w-id="e6fd6173-b489-5525-aade-2cb81257c8f6" data-animation-type="lottie" data-src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674eae9e030ce35fdbabe5d6_animate%203.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="10.04"></div></div></section><section class="hero-without-image"><div class="container"><div class="hero-wrapper-two"><h1 class="heading-77">Community of <span id="numberCount20" class="text-span-23">20k+</span> Learners &amp; Growing…</h1><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6742f37aecc4a01ade15e767_Separator.svg" loading="lazy" alt="" class="image-119"/><div id="w-node-_9c701717-80bd-d0ba-29c7-94bb1b1ad814-364723a9" class="w-layout-layout quick-stack-3 wf-layout-layout"><div class="w-layout-cell cell-7"><h6 class="heading-78">FOLLOWERS</h6><h3 id="numberCount" class="heading-79">7.04M+</h3></div><div class="w-layout-cell cell-6"><h6 class="heading-78">INTERACTIONS IN LAST 90 DAYS</h6><h3 id="numberCount2" class="heading-79">15M+</h3></div><div class="w-layout-cell cell-8"><h6 class="heading-78">ACCOUNTS REACHED IN LAST 90 DAYS</h6><h3 id="numberCount3" class="heading-79">7.04M+</h3></div><div class="w-layout-cell cell-9"><h6 class="heading-78">NEW FOLLOWERS IN LAST 90 DAYS</h6><h3 id="numberCount4" class="heading-79">1M+</h3></div></div></div></div></section><section id="typewriter-section" class="hero-without-image-2"><div class="container-12"><div class="hero-wrapper-two-2"><p class="margin-bottom-24px-2">Team BeerBiceps has mastered the art of content creation and monetization. Our team has been creating content for <span class="text-span-24">8+ years</span> across <span class="text-span-25">7+ platforms</span> &amp; generated massive amounts of money from various revenue streams. Our courses are based on years of hands-on experience and strategies we’ve used to grow our media empire. Join us to start, earn and grow with your own content creation career!</p><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6f0a16a11021e5e6f3b98_GROUP-IMAGE-EVENT-02%20(1).webp" loading="lazy" width="Auto" sizes="(max-width: 1919px) 100vw, 1920px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6f0a16a11021e5e6f3b98_GROUP-IMAGE-EVENT-02%20(1)-p-500.webp 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6f0a16a11021e5e6f3b98_GROUP-IMAGE-EVENT-02%20(1)-p-800.webp 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6f0a16a11021e5e6f3b98_GROUP-IMAGE-EVENT-02%20(1)-p-1080.webp 1080w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6f0a16a11021e5e6f3b98_GROUP-IMAGE-EVENT-02%20(1)-p-1600.webp 1600w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6f0a16a11021e5e6f3b98_GROUP-IMAGE-EVENT-02%20(1).webp 1920w" class="image-173 bubble-img"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501bc4640df26780e271a0_DSC01522_2_11zon.jpg" loading="lazy" width="Auto" sizes="(max-width: 6000px) 100vw, 6000px" alt="" id="animated-text5" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501bc4640df26780e271a0_DSC01522_2_11zon-p-500.jpg 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501bc4640df26780e271a0_DSC01522_2_11zon-p-800.jpg 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501bc4640df26780e271a0_DSC01522_2_11zon-p-1080.jpg 1080w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501bc4640df26780e271a0_DSC01522_2_11zon-p-1600.jpg 1600w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501bc4640df26780e271a0_DSC01522_2_11zon-p-2000.jpg 2000w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501bc4640df26780e271a0_DSC01522_2_11zon-p-2600.jpg 2600w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501bc4640df26780e271a0_DSC01522_2_11zon-p-3200.jpg 3200w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501bc4640df26780e271a0_DSC01522_2_11zon.jpg 6000w" class="image-108 bubble-img"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501c54bbc475ea5efad6fd__DSC2612%20(1)_1_11zon_3_11zon.jpg" loading="lazy" width="Auto" sizes="(max-width: 4672px) 100vw, 4672px" alt="" id="animated-text4" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501c54bbc475ea5efad6fd__DSC2612%20(1)_1_11zon_3_11zon-p-500.jpg 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501c54bbc475ea5efad6fd__DSC2612%20(1)_1_11zon_3_11zon-p-800.jpg 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501c54bbc475ea5efad6fd__DSC2612%20(1)_1_11zon_3_11zon-p-1080.jpg 1080w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501c54bbc475ea5efad6fd__DSC2612%20(1)_1_11zon_3_11zon-p-1600.jpg 1600w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501c54bbc475ea5efad6fd__DSC2612%20(1)_1_11zon_3_11zon-p-2000.jpg 2000w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501c54bbc475ea5efad6fd__DSC2612%20(1)_1_11zon_3_11zon-p-2600.jpg 2600w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501c54bbc475ea5efad6fd__DSC2612%20(1)_1_11zon_3_11zon.jpg 4672w" class="image-109 bubble-img"/><div class="div-block-97 video"><div style="padding-top:56.17021276595745%" class="video-3 w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FuKoLLUQUMbg%3Ffeature%3Doembed&amp;display_name=YouTube&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DuKoLLUQUMbg&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FuKoLLUQUMbg%2Fhqdefault.jpg&amp;type=text%2Fhtml&amp;schema=youtube" width="940" height="528" scrolling="no" allowfullscreen title="Welcome to BeerBiceps SkillHouse"></iframe></div></div></div><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f4fa17486742a196806a75_JPG_11zon.webp" loading="lazy" sizes="(max-width: 7008px) 100vw, 7008px" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f4fa17486742a196806a75_JPG_11zon-p-500.webp 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f4fa17486742a196806a75_JPG_11zon-p-800.webp 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f4fa17486742a196806a75_JPG_11zon-p-1080.webp 1080w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f4fa17486742a196806a75_JPG_11zon-p-1600.webp 1600w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f4fa17486742a196806a75_JPG_11zon-p-2000.webp 2000w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f4fa17486742a196806a75_JPG_11zon-p-2600.webp 2600w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f4fa17486742a196806a75_JPG_11zon-p-3200.webp 3200w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f4fa17486742a196806a75_JPG_11zon.webp 7008w" alt="" class="image-174 bubble-img"/></div></section><section class="hero-subscribe-left"><div class="container-13"><div class="hero-wrapper"><div class="hero-split"><h1 class="heading-80"><span class="text-span-26">Get Access</span> to Everything At One Click!</h1><p class="margin-bottom-24px-3">Download BeerBiceps Skillhouse app and get instant access to exclusive freebies that boost your content game.</p><div id="w-node-_9a433d2c-dbc7-7a8d-8792-1d4b7c8c1089-364723a9" class="w-layout-layout quick-stack-8 wf-layout-layout"><div class="w-layout-cell"><a href="https://play.google.com/store/apps/details?id=com.tagmango.beerbiceps" target="_blank" class="w-inline-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6746babd1dd638f3dec77c73_button-googlePlay.svg" loading="lazy" width="200" alt=""/></a></div><div class="w-layout-cell"><a href="https://apps.apple.com/in/app/beerbiceps-skillhouse/id6478582134" class="w-inline-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6746babd8afc75af46bfc022_button-apple.svg" loading="lazy" width="200" alt=""/></a></div></div></div><div class="hero-split"><img class="shadow-two" src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67877c0bd6dcebaa66e1931d_MOBILE-MOCKUP%201.webp" width="418" height="Auto" alt="" sizes="(max-width: 479px) 100vw, 418px" id="animated-text" loading="lazy" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67877c0bd6dcebaa66e1931d_MOBILE-MOCKUP%201-p-500.webp 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67877c0bd6dcebaa66e1931d_MOBILE-MOCKUP%201-p-800.webp 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67877c0bd6dcebaa66e1931d_MOBILE-MOCKUP%201-p-1080.webp 1080w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67877c0bd6dcebaa66e1931d_MOBILE-MOCKUP%201-p-1600.webp 1600w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67877c0bd6dcebaa66e1931d_MOBILE-MOCKUP%201-p-2000.webp 2000w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67877c0bd6dcebaa66e1931d_MOBILE-MOCKUP%201-p-2600.webp 2600w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67877c0bd6dcebaa66e1931d_MOBILE-MOCKUP%201-p-3200.webp 3200w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67877c0bd6dcebaa66e1931d_MOBILE-MOCKUP%201.webp 6132w"/></div></div></div></section><section class="hero-heading-center"><div class="container-13"><h1 class="centered-heading margin-bottom-32px">Meet Your <span class="text-span-27">Mentors</span></h1><div class="div-block-57"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6742f37aecc4a01ade15e767_Separator.svg" loading="lazy" alt="" class="image-111"/><div id="w-node-bf6f693b-082c-dc34-96a9-349a7a8d2ec7-364723a9" class="w-layout-layout quick-stack-5 mb-none wf-layout-layout"><div class="w-layout-cell cell-14 rel-1"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67483c3a9473c9d2a2bb1168_fi_17530824.svg" loading="lazy" alt="" class="image-120"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67483c3a02ebbfc73d9accc9_fi_1077042.svg" loading="lazy" alt="" class="image-121"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674300fd96c92ec77e85655b_2d6208d28e3d018936eba8eb08a1d36b.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674300fd96c92ec77e85655b_2d6208d28e3d018936eba8eb08a1d36b-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674300fd96c92ec77e85655b_2d6208d28e3d018936eba8eb08a1d36b-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674300fd96c92ec77e85655b_2d6208d28e3d018936eba8eb08a1d36b.png 1080w" class="image-hover-effect1"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Ranveer</strong> Allahbadia</h6><h6 class="heading-84">Co-Founder &amp; Content Entrepreneur</h6></div></div><div class="w-layout-cell cell-15 rel-2"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674857e3fb630846e057c1d5_fi_6622004.svg" loading="lazy" alt="" class="image-122"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674857e38d3f906ad9906a20_fi_9294933.svg" loading="lazy" alt="" class="image-123"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a21e5c164ac42cd692_3a44ea29f788218cd9709384791a8501.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a21e5c164ac42cd692_3a44ea29f788218cd9709384791a8501-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a21e5c164ac42cd692_3a44ea29f788218cd9709384791a8501-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a21e5c164ac42cd692_3a44ea29f788218cd9709384791a8501.png 1080w" class="image-hover-effect2"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Manish </strong>Pandey</h6><h6 class="heading-84">Chief Executive Officer</h6></div></div><div class="w-layout-cell cell-16 rel-3"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67485829e2d5bdc61f42e6df_fi_263075.svg" loading="lazy" alt="" class="image-124"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6748582974610c1a825bc22e_fi_10464714.svg" loading="lazy" alt="" class="image-125"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a2d82d3e7ba73f49ce_255c7535d057026014709f1f3d917ebe.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a2d82d3e7ba73f49ce_255c7535d057026014709f1f3d917ebe-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a2d82d3e7ba73f49ce_255c7535d057026014709f1f3d917ebe-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a2d82d3e7ba73f49ce_255c7535d057026014709f1f3d917ebe.png 1080w" class="image-hover-effect3"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Nachiket </strong>Nisal</h6><h6 class="heading-84">Chief Operating Officer</h6></div></div></div><div id="w-node-_17e92719-539e-90a4-c130-fe115574de51-364723a9" class="w-layout-layout quick-stack-6 mb-none wf-layout-layout"><div class="w-layout-cell cell-17 rel-4"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6748668ee3b09aac3074dc70_fi_1275099.svg" loading="lazy" alt="" class="image-126"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6748668edaa89b893289eee9_fi_8242575.svg" loading="lazy" alt="" class="image-127"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67430504ced71f07885ce80b_0bcbc498df1030edcd37394f13d6116e.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67430504ced71f07885ce80b_0bcbc498df1030edcd37394f13d6116e-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67430504ced71f07885ce80b_0bcbc498df1030edcd37394f13d6116e-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67430504ced71f07885ce80b_0bcbc498df1030edcd37394f13d6116e.png 1080w" class="image-hover-effect4"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Akshat </strong>Tiwari</h6><h6 class="heading-84">Head Video Editor</h6></div></div><div class="w-layout-cell cell-18 rel-5"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67486750f0225695d3aba9b8_fi_3874990.svg" loading="lazy" alt="" class="image-128"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674867503c97ab10a3b578fa_fi_10187467.svg" loading="lazy" alt="" class="image-129"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fb4d939e92a7515e15_37bb7f10371bee99400d58e25341c7d4.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fb4d939e92a7515e15_37bb7f10371bee99400d58e25341c7d4-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fb4d939e92a7515e15_37bb7f10371bee99400d58e25341c7d4-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fb4d939e92a7515e15_37bb7f10371bee99400d58e25341c7d4.png 1080w" class="image-hover-effect5"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Rajas </strong>Pardeshi</h6><h6 class="heading-84">Head of Production</h6></div></div><div class="w-layout-cell cell-19 rel-6"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674867f4a5f928fe5071fa30_fi_2995035.svg" loading="lazy" alt="" class="image-130"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674867f4b56d3d450ff893ca_fi_11820254.svg" loading="lazy" alt="" class="image-131"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fba18884f649141e21_8485b2658a17f4743febb668b1ecf4ff.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fba18884f649141e21_8485b2658a17f4743febb668b1ecf4ff-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fba18884f649141e21_8485b2658a17f4743febb668b1ecf4ff-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fba18884f649141e21_8485b2658a17f4743febb668b1ecf4ff.png 1080w" class="image-hover-effect6"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Mahima </strong>Thakar</h6><h6 class="heading-84">Head of Content</h6></div></div></div><div data-delay="4000" data-animation="slide" class="team-slider-wrapper-3 ds-none w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="12" data-duration="500" data-infinite="true"><div class="w-slider-mask"><div class="team-slide-wrapper-3 w-slide"><div class="team-block-3"><div class="team-block-info-3 cell-14 rel-1"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674300fd96c92ec77e85655b_2d6208d28e3d018936eba8eb08a1d36b.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674300fd96c92ec77e85655b_2d6208d28e3d018936eba8eb08a1d36b-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674300fd96c92ec77e85655b_2d6208d28e3d018936eba8eb08a1d36b-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674300fd96c92ec77e85655b_2d6208d28e3d018936eba8eb08a1d36b.png 1080w" class="image-hover-effect1"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67483c3a02ebbfc73d9accc9_fi_1077042.svg" loading="lazy" alt="" class="image-121"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67483c3a9473c9d2a2bb1168_fi_17530824.svg" loading="lazy" alt="" class="image-120"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Ranveer </strong>Allahbadia</h6><h6 class="heading-84">Co-Founder &amp; Content Entrepreneur</h6></div></div></div></div><div class="team-slide-wrapper-3 w-slide"><div class="team-block-3"><div class="team-block-info-3 cell-15 rel-2"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a21e5c164ac42cd692_3a44ea29f788218cd9709384791a8501.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a21e5c164ac42cd692_3a44ea29f788218cd9709384791a8501-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a21e5c164ac42cd692_3a44ea29f788218cd9709384791a8501-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a21e5c164ac42cd692_3a44ea29f788218cd9709384791a8501.png 1080w" class="image-hover-effect2"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674857e38d3f906ad9906a20_fi_9294933.svg" loading="lazy" alt="" class="image-123"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674857e3fb630846e057c1d5_fi_6622004.svg" loading="lazy" alt="" class="image-122"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Manish </strong>Pandey</h6><h6 class="heading-84">Chief Executive Officer</h6></div></div></div></div><div class="team-slide-wrapper-3 w-slide"><div class="team-block-3"><div class="team-block-info-3 cell-16 rel-3"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a2d82d3e7ba73f49ce_255c7535d057026014709f1f3d917ebe.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a2d82d3e7ba73f49ce_255c7535d057026014709f1f3d917ebe-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a2d82d3e7ba73f49ce_255c7535d057026014709f1f3d917ebe-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674302a2d82d3e7ba73f49ce_255c7535d057026014709f1f3d917ebe.png 1080w" class="image-hover-effect3"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6748582974610c1a825bc22e_fi_10464714.svg" loading="lazy" alt="" class="image-125"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67485829e2d5bdc61f42e6df_fi_263075.svg" loading="lazy" alt="" class="image-124"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Nachiket </strong>Nisal</h6><h6 class="heading-84">Chief Operating Officer</h6></div></div></div></div><div class="team-slide-wrapper-3 w-slide"><div class="team-block-3"><div class="team-block-info-3 cell-17 rel-4"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67430504ced71f07885ce80b_0bcbc498df1030edcd37394f13d6116e.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67430504ced71f07885ce80b_0bcbc498df1030edcd37394f13d6116e-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67430504ced71f07885ce80b_0bcbc498df1030edcd37394f13d6116e-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67430504ced71f07885ce80b_0bcbc498df1030edcd37394f13d6116e.png 1080w" class="image-hover-effect4"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6748668edaa89b893289eee9_fi_8242575.svg" loading="lazy" alt="" class="image-127"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6748668ee3b09aac3074dc70_fi_1275099.svg" loading="lazy" alt="" class="image-126"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Akshat </strong>Tiwari</h6><h6 class="heading-84">Head Video Editor</h6></div></div></div></div><div class="team-slide-wrapper-3 w-slide"><div class="team-block-3"><div class="team-block-info-3 cell-18 rel-5"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fb4d939e92a7515e15_37bb7f10371bee99400d58e25341c7d4.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fb4d939e92a7515e15_37bb7f10371bee99400d58e25341c7d4-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fb4d939e92a7515e15_37bb7f10371bee99400d58e25341c7d4-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fb4d939e92a7515e15_37bb7f10371bee99400d58e25341c7d4.png 1080w" class="image-hover-effect5"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674867503c97ab10a3b578fa_fi_10187467.svg" loading="lazy" alt="" class="image-129"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67486750f0225695d3aba9b8_fi_3874990.svg" loading="lazy" alt="" class="image-128"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Rajas </strong>Pardeshi</h6><h6 class="heading-84">Head of Production</h6></div></div></div></div><div class="team-slide-wrapper-3 w-slide"><div class="team-block-3"><div class="team-block-info-3 cell-19 rel-6"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fba18884f649141e21_8485b2658a17f4743febb668b1ecf4ff.png" loading="lazy" width="205" sizes="(max-width: 479px) 100vw, 205px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fba18884f649141e21_8485b2658a17f4743febb668b1ecf4ff-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fba18884f649141e21_8485b2658a17f4743febb668b1ecf4ff-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674304fba18884f649141e21_8485b2658a17f4743febb668b1ecf4ff.png 1080w" class="image-hover-effect6"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674867f4b56d3d450ff893ca_fi_11820254.svg" loading="lazy" alt="" class="image-131"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674867f4a5f928fe5071fa30_fi_2995035.svg" loading="lazy" alt="" class="image-130"/><div class="div-block-58 zindx"><h6 class="heading-83"><strong>Mahima </strong>Thakar</h6><h6 class="heading-84">Head of Content</h6></div></div></div></div></div><div class="team-slider-arrow-3 w-slider-arrow-left"><div class="w-icon-slider-left"></div></div><div class="team-slider-arrow-3 w-slider-arrow-right"><div class="w-icon-slider-right"></div></div><div class="team-slider-nav-3 w-slider-nav w-slider-nav-invert w-round"></div></div></div></div></section><section class="hero-heading-left"><div class="container-14"><div class="hero-wrapper-3"><div class="hero-split-2"><h1 id="animated-text3" class="heading-85"><span class="text-span-28">Step Up</span> Your Game With Unique Creator Experiences</h1><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6742f37aecc4a01ade15e767_Separator.svg" loading="lazy" alt="" class="image-112"/><a href="https://www.beerbicepsskillhouse.com/experiences" class="button-4 w-button">Participate Now!</a></div><div class="hero-split-2"><div data-delay="3000" data-animation="slide" class="team-slider-wrapper-2 w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="12" data-duration="2000" data-infinite="true"><div class="mask-3 w-slider-mask"><div class="team-slide-wrapper-2 redirecttoexp w-slide"><div class="team-block-2"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674dfda2a163b74f0c2d2203_platinum%20event_.jpg" loading="lazy" sizes="(max-width: 1080px) 100vw, 1080px" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674dfda2a163b74f0c2d2203_platinum%20event_-p-500.jpg 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674dfda2a163b74f0c2d2203_platinum%20event_-p-800.jpg 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674dfda2a163b74f0c2d2203_platinum%20event_.jpg 1080w" alt="" class="team-member-image-two-2"/><div class="team-block-info-2"><div><h6 class="heading-112">MAY</h6><h6 class="heading-114">25</h6><h6 class="heading-113">2024</h6></div><div class="div-block-67"><h6 class="heading-115">Podcasting101 Platinum Even</h6><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67480e769710cdd373e60716_Frame%2034.svg" loading="lazy" width="229" alt=""/></div></div></div></div><div id="redirectToExp" class="team-slide-wrapper-2 redirecttoexp w-slide"><div class="team-block-2"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6e493afeef87b25ef9d1e_DESIGN%20HACKATHON.jpg" loading="lazy" sizes="(max-width: 1080px) 100vw, 1080px" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6e493afeef87b25ef9d1e_DESIGN%20HACKATHON-p-500.jpg 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6e493afeef87b25ef9d1e_DESIGN%20HACKATHON-p-800.jpg 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6e493afeef87b25ef9d1e_DESIGN%20HACKATHON.jpg 1080w" alt="" class="team-member-image-two-2"/><div class="team-block-info-2"><div><h6 class="heading-112">JAN</h6><h6 class="heading-114">28</h6><h6 class="heading-113">2025</h6></div><div class="div-block-67"><h6 class="heading-115">Thumbnail Design Challenge</h6><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6e56425ef01c849e1044a_Frame%2034.svg" loading="lazy" width="229" alt=""/></div></div></div></div><div class="team-slide-wrapper-2 redirecttoexp w-slide"><div class="team-block-2"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501481a84d18f683d8a89a_REEL%20CHALLENGE_.jpg" loading="lazy" sizes="(max-width: 1080px) 100vw, 1080px" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501481a84d18f683d8a89a_REEL%20CHALLENGE_-p-500.jpg 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501481a84d18f683d8a89a_REEL%20CHALLENGE_-p-800.jpg 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67501481a84d18f683d8a89a_REEL%20CHALLENGE_.jpg 1080w" alt="" class="team-member-image-two-2"/><div class="team-block-info-2"><div><h6 class="heading-112">AUG</h6><h6 class="heading-114">03</h6><h6 class="heading-113">2024</h6></div><div class="div-block-67"><h6 class="heading-115">7 Day Reel Challenge</h6><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6e3c8a2baca5ab5852c5c_Frame%2034.svg" loading="lazy" width="229" alt=""/></div></div></div></div><div class="team-slide-wrapper-2 redirecttoexp w-slide"><div class="team-block-2"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6750153fc5b1e7dabb35b0ab_DESIGN%20CHALLENGE_.jpg" loading="lazy" sizes="(max-width: 1080px) 100vw, 1080px" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6750153fc5b1e7dabb35b0ab_DESIGN%20CHALLENGE_-p-500.jpg 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6750153fc5b1e7dabb35b0ab_DESIGN%20CHALLENGE_-p-800.jpg 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6750153fc5b1e7dabb35b0ab_DESIGN%20CHALLENGE_.jpg 1080w" alt="" class="team-member-image-two-2"/><div class="team-block-info-2"><div><h6 class="heading-112">AUG</h6><h6 class="heading-114">16</h6><h6 class="heading-113">2024</h6></div><div class="div-block-67"><h6 class="heading-115">7 Day Design Challenge</h6><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6e37d99950bc71c4a95f7_Frame%2034.svg" loading="lazy" width="229" alt=""/></div></div></div></div><div id="redirectToExp" class="team-slide-wrapper-2 redirecttoexp w-slide"><div class="team-block-2"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674dfd81558cfbd23c14b984_hackathon.jpg" loading="lazy" sizes="(max-width: 1080px) 100vw, 1080px" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674dfd81558cfbd23c14b984_hackathon-p-500.jpg 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674dfd81558cfbd23c14b984_hackathon-p-800.jpg 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674dfd81558cfbd23c14b984_hackathon.jpg 1080w" alt="" class="team-member-image-two-2"/><div class="team-block-info-2"><div><h6 class="heading-112">AUG</h6><h6 class="heading-114">26</h6><h6 class="heading-113">2024</h6></div><div class="div-block-67"><h6 class="heading-115">Video Editing Hackathon</h6><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67c6e417309950dc0f54847e_Frame%2034.svg" loading="lazy" width="229" alt=""/></div></div></div></div></div><div class="team-slider-arrow-2 w-slider-arrow-left"><div class="w-icon-slider-left"></div></div><div class="team-slider-arrow-2 w-slider-arrow-right"><div class="w-icon-slider-right"></div></div><div class="team-slider-nav-2 w-slider-nav w-slider-nav-invert w-round"></div></div></div></div></div></section><section class="hero-without-image-3"><div class="container-14"><div class="hero-wrapper-two-3"><h1 class="heading-86">Tune Into Our <span class="text-span-29">Community’s Stories</span></h1><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6742f37aecc4a01ade15e767_Separator.svg" loading="lazy" alt="" class="image-113"/><div id="animated-text1" class="w-layout-layout quick-stack-7 w-node-_597f42c2-e5ed-b5be-7688-17e9660b8804-364723a9 wf-layout-layout"><div class="w-layout-cell cell-42"><div class="div-block-161"><div style="padding-top:56.17021276595745%" class="video-5 w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FxEPgeqRSgHc%3Ffeature%3Doembed&amp;display_name=YouTube&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DxEPgeqRSgHc&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FxEPgeqRSgHc%2Fhqdefault.jpg&amp;type=text%2Fhtml&amp;schema=youtube" width="940" height="528" scrolling="no" allowfullscreen title="Review of Podcasting 101 Standard Member"></iframe></div></div></div><div class="w-layout-cell"><div class="div-block-161"><div style="padding-top:56.17021276595745%" class="video-5 w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FAib8VtBZ1bo%3Ffeature%3Doembed&amp;display_name=YouTube&amp;url=https%3A%2F%2Fwww.youtube.com%2Fshorts%2FAib8VtBZ1bo%3Ffeature%3Dshare&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FAib8VtBZ1bo%2Fhqdefault.jpg&amp;type=text%2Fhtml&amp;schema=youtube" width="940" height="528" scrolling="no" allowfullscreen title="Review of Podcasting101 Gold Member Munish"></iframe></div></div></div><div class="w-layout-cell"><div class="div-block-161"><div style="padding-top:56.17021276595745%" class="video-5 w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F3qbuEtPFEiU%3Ffeature%3Doembed&amp;display_name=YouTube&amp;url=https%3A%2F%2Fwww.youtube.com%2Fshorts%2F3qbuEtPFEiU%3Fundefined&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F3qbuEtPFEiU%2Fhqdefault.jpg&amp;type=text%2Fhtml&amp;schema=youtube" width="940" height="528" scrolling="no" allowfullscreen title="Review of Video Editing Mastery Member"></iframe></div></div></div></div><div id="animated-text1" class="w-layout-layout quick-stack-7 w-node-c64e9cb8-4e51-80c9-8490-4e111d869881-364723a9 wf-layout-layout"><div class="w-layout-cell cell-42"><div class="div-block-161"><div style="padding-top:56.17021276595745%" class="video-5 w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FXmjix5R-5qw%3Ffeature%3Doembed&amp;display_name=YouTube&amp;url=https%3A%2F%2Fwww.youtube.com%2Fshorts%2FXmjix5R-5qw%3Ffeature%3Dshare&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FXmjix5R-5qw%2Fhqdefault.jpg&amp;type=text%2Fhtml&amp;schema=youtube" width="940" height="528" scrolling="no" allowfullscreen title="Review of Instagram 101 Member Noman"></iframe></div></div></div><div class="w-layout-cell"><div class="div-block-161"><div style="padding-top:56.17021276595745%" class="video-5 w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FMvIyhgj614M%3Ffeature%3Doembed&amp;display_name=YouTube&amp;url=https%3A%2F%2Fwww.youtube.com%2Fshorts%2FMvIyhgj614M%3Ffeature%3Dshare&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FMvIyhgj614M%2Fhqdefault.jpg&amp;type=text%2Fhtml&amp;schema=youtube" width="940" height="528" scrolling="no" allowfullscreen title="Review of Monetising Content Creation Course Member"></iframe></div></div></div><div class="w-layout-cell"><div class="div-block-161 custom-w-y-v"><div style="padding-top:56.17021276595745%" class="video-5 w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FjyJWVAbGl2o%3Ffeature%3Doembed&amp;display_name=YouTube&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjyJWVAbGl2o&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FjyJWVAbGl2o%2Fhqdefault.jpg&amp;type=text%2Fhtml&amp;schema=youtube" width="940" height="528" scrolling="no" allowfullscreen title="Vertical(wide)- BBSH Podcasting Platinum Event 1 Testimonial- Rodrigo"></iframe></div></div></div></div><div id="animated-text1" class="w-layout-layout quick-stack-7 w-node-e994b338-5bbb-5db9-69ed-191daa036617-364723a9 wf-layout-layout"><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I run a digital marketing agency and found this course through Instagram ads. The storytelling segment and process-oriented approach were valuable, but I’d rate it 8.5/10, as the Instagram course could include more on branding and business.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e21bd94aef22a77beb5_Icon%20Strategy%20(10).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Pratik</h6><h6 class="heading-89">Video Editing Course</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;Highly informative and helpful, especially for a beginner like me. The art of conversation and outreach segments were the most beneficial. I’d recommend this course to anyone pursuing podcasting and would rate it 8.5/10.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e224dd18feef88a0801_Icon%20Strategy%20(15).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Abhay Maheshwari</h6><h6 class="heading-89">Podcasting 101</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I found this course through Instagram ads, and the monetizing strategies were really insightful. While I would have loved more in-depth content on Meta and Instagram monetization, I’d still rate the course 9.5/10 for its value and help!&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e22cfa7a1910d852790_Icon%20Strategy%20(17).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Shubham Shinde</h6><h6 class="heading-89">Monetising Content creation</h6></div></div></div></div><div id="animated-text1" class="w-layout-layout quick-stack-7 w-node-c14a1305-65fa-117b-98f7-0f2dfaa5342c-364723a9 wf-layout-layout"><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I’m a 42-year-old jewelry business owner in Bengaluru, and I took this course to learn about Instagram for my business. I really enjoyed the course, especially the insights on AI and prompt engineering, though I wish it was a bit longer. I’d rate it 8/10 and have recommended it to friends!&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6799ddd30ce470e2148d53f8_Icon%20Strategy%20(11).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Jhansi Upputuri</h6><h6 class="heading-89">Instagram 101</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I&#x27;m a photographer and video editor who discovered your course through <em>The Ranveer Show</em> and Instagram. It taught me valuable new skills, though more detailed breakdowns of complex techniques would enhance it—9/10 overall!&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e21406c4123d2680bee_Icon%20Strategy%20(2).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Shreya Yadav</h6><h6 class="heading-89">Video Editing Course</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;As a beginner, I found this course incredibly helpful, learning many new insights and detailed knowledge. I&#x27;m starting a solo podcast and plan to apply these learnings. As a big fan of Ranveer, I’d rate it 10/10 and highly recommend it.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e2248e62cb35887ed81_Icon%20Strategy%20(12).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Apprna Walia</h6><h6 class="heading-89">Podcasting 101</h6></div></div></div></div><div id="animated-text2" class="w-layout-layout quick-stack-7 hide-review w-node-_18de95c0-11aa-6126-4e09-eb830cbeb44b-364723a9 wf-layout-layout"><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I discovered this course through Facebook and Instagram, and it served as a great refresher with insightful content and excellent mentors. Despite a minor app issue, I found the course perfect for launching my social media channel, and I’d rate it 10/10.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e21001cc3a4c10f5012_Icon%20Strategy%20(3).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Pradnya Shinde</h6><h6 class="heading-89">Monetising Content creation</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I bought the course out of curiosity, and I&#x27;m glad I did! I&#x27;m pursuing a postgraduate degree in Architecture, and I found the course insightful, especially the first five modules. Although the later modules felt repetitive, they were still necessary. I&#x27;d recommend this course to anyone looking to improve their Instagram game and have already suggested it to a few friends. I&#x27;d rate it 8/10.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e227d9046f26ed8d436_Icon%20Strategy%20(5).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Sipun Naik</h6><h6 class="heading-89">Instagram 101</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I run a chocolate business and took this course to learn reel editing. The mentors explained everything clearly, though I faced challenges with raw footage access and lack of software—overall a great course, but I’ll rate it fully after completing it.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e23fc527c2e490b586a_Icon%20Strategy%20(9).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Deepali Bahadur</h6><h6 class="heading-89">Video Editing Course</h6></div></div></div></div><div id="animated-text2" class="w-layout-layout quick-stack-7 hide-review w-node-d024580a-fc7e-3527-ea27-0544a8347123-364723a9 wf-layout-layout"><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;Pursuing my master’s, I found the course beginner-friendly but felt live sessions or 101 classes would add great value. While it covered basics well, it lacked guidance on outreach, crucial for podcasting. I&#x27;d rate it 6.5–7/10 and recommend it to aspiring podcasters.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e2378031f4022a93b64_Icon%20Strategy%20(20).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Saloni Belliappa B</h6><h6 class="heading-89">Podcasting 101</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I discovered this course through Instagram as I follow Ranveer, and it was great for enhancing my skills as a content creator. Manish Sir&#x27;s session was invaluable, but more insights into pricing strategies for reels and posts would have been helpful. I’d rate the course 8/10.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e23ffd30a9b3cea9727_Icon%20Strategy%20(22).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Vaibhav Gulati</h6><h6 class="heading-89">Monetising Content creation</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I recently transitioned from IT to full-time content creation and found this course incredibly helpful. I learned new Instagram strategies and tricks, and I would rate it 9.5/10—perfect for budding creators like me!&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e23fd2f81997c101b04_Icon%20Strategy%20(13).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Sahil Kamlakar Sawant</h6><h6 class="heading-89">Instagram 101</h6></div></div></div></div><div id="animated-text2" class="w-layout-layout quick-stack-7 hide-review w-node-_90a5c443-21ad-75f5-fea6-2d9250345136-364723a9 wf-layout-layout"><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I’m a full-time Product Designer at a startup, exploring video editing and content creation. I found this course through the TRS podcast and liked its quality and detailed explanations by Rajas and Akshat. While not a 101 course, adding beginner sessions would enhance it. I’d rate it 8/10.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e23c8a9859eed974516_Icon%20Strategy%20(8).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Harshraj Vamanjoor</h6><h6 class="heading-89">Video Editing Course</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;As a full-time mom of a toddler, I decided to explore new things and joined this course after discovering it on Spotify through TRS podcasts. The course was excellent, with well-delivered information. I’d suggest extending the duration and covering more topics. I highly recommend it and rate it 9.5/10.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6799ddd435a2aa14e697ec9f_Icon%20Strategy%20(22).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Lipi Ghosh</h6><h6 class="heading-89">Podcasting 101</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;As a full-time content creator, I found this course incredibly valuable, especially the insights on team building and collaborating with brands. I’d rate it an 8.5/10 and would love to see more modules on production value and brand collaborations.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e2123179ab4c8f01ede_Icon%20Strategy%20(1).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Ankit Chanana</h6><h6 class="heading-89">Monetising Content creation</h6></div></div></div></div><div id="animated-text2" class="w-layout-layout quick-stack-7 hide-review w-node-ad813ff1-d092-3c73-6b13-e65547fcf319-364723a9 wf-layout-layout"><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I discovered the course through BeerBiceps Instagram and found it highly impressive with top-notch video quality and great structure. While I would have liked more details on monetization, I’d rate it 9/10 and highly recommend it for content creators.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e23bd38a452b8da5697_Icon%20Strategy%20(14).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Aryaman</h6><h6 class="heading-89">Instagram 101</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I recently completed engineering and took this course after hearing about it on the TRS Podcast. The mentors explained the content well, but sharing raw materials for practice in each chapter would improve it. I rate the course 8/10 and have upgraded to Gold membership.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e23bd38a452b8da569a_Icon%20Strategy%20(21).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Maitreya Milind Juvekar</h6><h6 class="heading-89">Video Editing Course</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;Inspired by Ranveer, I joined this rare podcasting course in our country. As a cybersecurity professional, I&#x27;m creating a podcast to simplify the industry. The Standard Membership was invaluable for shooting, editing, and lighting, though more on conversation skills would help beginners. Highly recommend it—I&#x27;d rate it 8–9/10.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e22fd2f81997c101acc_Icon%20Strategy%20(18).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Yuvraj Todankar</h6><h6 class="heading-89">Podcasting 101</h6></div></div></div></div><div id="animated-text2" class="w-layout-layout quick-stack-7 hide-review w-node-dad39389-31f1-bb8d-a7d2-f6240aec975a-364723a9 wf-layout-layout"><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I&#x27;m running a business and took this course to learn more about Instagram for future projects. The course was packed with valuable insights, and I&#x27;d rate it 8.5/10—highly recommend it for anyone wanting to master Instagram!&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e2068fb641d4cef92d0_Icon%20Strategy%20(4).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Shikhar Agarwal</h6><h6 class="heading-89">Instagram 101</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I’m in my final year of engineering and discovered this course through the BeerBiceps YouTube channel. The detailed content and live session were incredibly helpful. More live interactions, especially with Ranveer, would enhance the experience. I’d rate the course 9/10.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e2368fb641d4cef9439_Icon%20Strategy%20(19).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Adarsh gunjan</h6><h6 class="heading-89">Video Editing Course</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;Inspired by Ranveer, I joined his Podcasting 101 course, which offers comprehensive and helpful insights. While I wish it covered virtual podcasting in more detail, it&#x27;s a must for aspiring podcasters. As a design engineer, happiness coach, and freelancer, I found it invaluable and rate it 9/10.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e2248e62cb35887ed81_Icon%20Strategy%20(12).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Sheetal</h6><h6 class="heading-89">Podcasting 101</h6></div></div></div></div><div id="animated-text2" class="w-layout-layout quick-stack-7 hide-review w-node-_1916069d-fb24-2adf-30f4-20bda7211cf0-364723a9 wf-layout-layout"><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I found this course through Instagram and gained valuable insights into team building and social media management for my yoga business. I’d rate it a perfect 10/10 and will definitely leave a review!&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e21001cc3a4c10f5012_Icon%20Strategy%20(3).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Neha Shetty</h6><h6 class="heading-89">Monetising Content creation</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I&#x27;m a dentist with my own clinic, and I came across this course through BeerBiceps Skillhouse Instagram ads. The editing tips and Instagram strategies were really helpful for my content, and despite a minor app issue, I&#x27;d rate the courses 10/10!&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e23c8a9859eed974516_Icon%20Strategy%20(8).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Arijit Banerjee</h6><h6 class="heading-89">Instagram 101</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I discovered this course through the BeerBiceps YouTube channel, which I’ve followed for a long time. The basics of After Effects were explained excellently, and the materials were helpful. Additional modules on After Effects and Photoshop, along with improved pacing by Akshat Tiwari, would enhance the course. I rate it 8.5/10 and have recommended it to friends.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e23407a54b62798070c_Icon%20Strategy%20(23).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Vraj Acharya</h6><h6 class="heading-89">Video Editing Course</h6></div></div></div></div><div id="animated-text2" class="w-layout-layout quick-stack-7 hide-review w-node-_8bb95fe6-6012-e1ae-a7dd-eb1eae6ea763-364723a9 wf-layout-layout"><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I found this course on Instagram after struggling to continue my podcast with 10 episodes. What I loved most was its well-structured content, which simplified the technical aspects of podcasting and provided clarity on budgeting setups. It helped me reassess my podcast and plan its future. I would rate this course 10/10!&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e22ec2f4b60fbbf35d5_Icon%20Strategy%20(11).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Aniket Banvi</h6><h6 class="heading-89">Podcasting 101</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I started a digital marketing company and found this course invaluable, especially for team building and workflow management. I’d rate it 8/10 and would have liked more in-depth content on managing client work and live sessions for better engagement.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e22cfa7a1910d852790_Icon%20Strategy%20(17).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Rijo Johnson</h6><h6 class="heading-89">Monetising Content creation</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I&#x27;m currently pursuing my graduation and discovered this course through Instagram while following TRS. It was really helpful, especially for understanding Instagram, but I would have liked more personalized content advice for specific niches. I&#x27;d rate it 8/10.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e21bd94aef22a77beb5_Icon%20Strategy%20(10).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Dipanshu</h6><h6 class="heading-89">Instagram 101</h6></div></div></div></div><div id="animated-text2" class="w-layout-layout quick-stack-7 hide-review w-node-ad35335f-00cc-68c6-f5c4-3eeb2d5c9ddb-364723a9 wf-layout-layout"><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I run a social media agency in Surat and took the Monetising Content Creation and Instagram 101 courses to enhance our strategies. The Team Building and SOP chapters, along with Instagram hacks, were invaluable, delivering great results for our clients. I shared the courses with my team, and they found them helpful too.With lifetime access, I can revisit content anytime. I’d rate the course a 25/10—exceeded my expectations compared to other costly courses. Looking forward to more!&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e22ec2f4b60fbbf35d5_Icon%20Strategy%20(11).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Samarth</h6><h6 class="heading-89">Monetising Content creation</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I took a break from content creation, but this course helped me reflect on my journey. Having followed Ranveer for 7 years, I trust his courses, and this one was exceptional. It gave me new ideas to integrate into my work and motivated me to start my YouTube channel. The course quality and content were great, and the app was smooth and user-friendly. I’ll definitely rate it on the App Store!I’d love to see a YouTube-specific course, and it would be amazing if challenges for content creators were introduced, similar to those for video editing. I&#x27;m really excited about that!&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e229393f1b85761c88d_Icon%20Strategy%20(6).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Palak yadav</h6><h6 class="heading-89">Instagram 101</h6></div></div></div><div class="w-layout-cell cell-20"><h6 class="heading-87">&quot;I discovered this course through Facebook and Instagram, as I’ve been following Ranveer Allahbadia for a long time. The course served as a great refresher, with insightful content and guidance from mentors like Mahima, Nachiket, and Manish Sir. I recently completed an advanced astrology course and was eager to start my own social media channel and monetize my business skills. This course provided perfect, crisp content to help me get started. Although I faced a minor issue with the app showing 90% completion despite finishing all modules, I’d still rate it 10/10 for its value and insights.&quot;</h6><div class="div-block-59"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/679c6e2368fb641d4cef9439_Icon%20Strategy%20(19).svg" loading="lazy" width="54" alt=""/><div class="div-block-60"><h6 class="heading-88">Pradnya Shinde</h6><h6 class="heading-89">Monetising Content creation</h6></div></div></div></div></div></div><div class="div-block-61"><a href="#" class="button-5 show-review w-button">Load More</a></div></section><section class="hero-heading-center-2"><div class="container-15"><div class="hero-wrapper-4"><div class="hero-split-3"><p class="margin-bottom-24px-6">THAT’S NOT ALL</p><h3 class="heading-90">What If You Can Save While You Learn?</h3><h6 class="heading-91">Challenge yourself, earn rewards, and level up your skills – gamified for extra fun.</h6><a href="https://www.beerbicepsskillhouse.com/earn-with-us" class="button-6 w-button">Participate Now!</a><div class="w-embed"><style>@media (min-width: 608px) {
+.ds-none-instant{
+display:none;
+}
+}
+
+</style></div></div><div class="hero-split-3 width-hero"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674416fb3581e92471e965db_fi_819590.svg" loading="lazy" width="71" alt="" class="image-115"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674417206a860f273cb9ccda_fi_17530824.svg" loading="lazy" width="88" alt="" class="image-114"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f3d25c4d91e924f4182a5a_DSC00032%20(1)-Photoroom.png" loading="lazy" width="620" sizes="(max-width: 767px) 100vw, 620px" alt="" srcset="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f3d25c4d91e924f4182a5a_DSC00032%20(1)-Photoroom-p-500.png 500w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f3d25c4d91e924f4182a5a_DSC00032%20(1)-Photoroom-p-800.png 800w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f3d25c4d91e924f4182a5a_DSC00032%20(1)-Photoroom-p-1080.png 1080w, https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67f3d25c4d91e924f4182a5a_DSC00032%20(1)-Photoroom.png 1280w" class="shadow-two-4"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6744170226c4e96b88a5288b_fi_6291445.svg" loading="lazy" width="68" alt="" class="image-116"/></div></div></div></section><section class="footer-light"><div class="container-15"><div class="footer-wrapper-two"><div class="footer-form ds-none w-form"><form id="wf-form-Footer-Form" name="wf-form-Footer-Form" data-name="Footer Form" method="get" class="footer-form-container" data-wf-page-id="673ecc1f4357102f364723a9" data-wf-element-id="76f0ff4d-18bb-85ed-f490-e2833cf93540"><h6 class="heading-106">NEWSLETTER</h6><h6 class="heading-107">Get insider updates from Team BeerBiceps</h6><div class="footer-form-block"><input class="footer-form-field w-input" maxlength="256" name="Footer-Email-2" data-name="Footer Email 2" aria-label="Get product updates" placeholder="Enter Your Email" type="email" id="Footer-Email-2" required=""/><input type="submit" data-wait="Please wait..." class="footer-form-submit w-button" value="Submit"/></div><h6 class="heading-108 mb-none">DOWNLOAD THE APP</h6><div id="w-node-_76f0ff4d-18bb-85ed-f490-e2833cf9354a-364723a9" class="w-layout-layout quick-stack-4 mb-none wf-layout-layout"><div id="playStoreMb" class="w-layout-cell cell-10"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6742f8d31e5c164ac426cdef_logos_google-play-icon.svg" loading="lazy" width="16" alt=""/><div><h6 class="heading-81">GET IT ON</h6><h4 class="heading-82">Google Play</h4></div></div><div id="appleStoreMb" class="w-layout-cell cell-10"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6742fc92d2b0777800f542a9_ic_baseline-apple.png" loading="lazy" width="20" alt=""/><div><h6 class="heading-81">Download on the</h6><h4 class="heading-82">App Store</h4></div></div></div></form><div class="w-form-done"><div>Thank you! Your submission has been received!</div></div><div class="w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div><a href="https://beerbicepsskillhouse.in/homepage-web" class="footer-brand w-inline-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67448d7b89745d23cbc5a258_new%20logo%20circle-01%201.svg" loading="lazy" width="150" alt="" class="image-160"/><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/67448e6306e5e381fc58be34_Vector.svg" loading="lazy" width="134" alt="" class="image-159"/></a><div class="div-block-64"><div class="footer-block-two"><div class="footer-title">QUICK LINKS</div><a href="refund.html" class="footer-link-two">Refund Policy</a><a href="privacy.html" class="footer-link-two">Privacy Policy</a><a href="https://app.beerbiceps.com/terms" class="footer-link-two">Terms of Use</a><a href="https://www.beerbicepsskillhouse.com/earn-with-us" class="footer-link-two">Affiliate Program</a><a href="mailto:support@beerbicepsskillhouse.com" class="footer-link-two">Contact Us</a></div><div class="footer-block-two margin-top"><a href="#" class="footer-link-two">About Us</a><a href="blogs.html" class="footer-link-two">Blogs</a><a href="video-editing-mastery.html" class="footer-link-two">Video Editing Mastery</a><a href="insgtaram101.html" class="footer-link-two">Instagram 101</a><a href="podcasting101.html" class="footer-link-two">Podcast 101</a><a href="https://learn.beerbicepsskillhouse.in/monetize-ig" class="footer-link-two">Monetize Content Creation</a><a href="https://design.beerbicepsskillhouse.in/" class="footer-link-two">Designing For Clicks</a></div></div><div class="footer-form mb-none w-form"><form id="wf-form-Footer-Form" name="wf-form-Footer-Form" data-name="Footer Form" method="get" class="footer-form-container" data-wf-page-id="673ecc1f4357102f364723a9" data-wf-element-id="283894cb-9986-f2ab-ddb6-c5d6eb308a53"><h6 class="heading-106">NEWSLETTER</h6><h6 class="heading-107">Get insider updates from Team BeerBiceps</h6><div class="footer-form-block"><input class="footer-form-field w-input" maxlength="256" name="Footer-Email" data-name="Footer Email" aria-label="Get product updates" placeholder="Enter Your Email" type="email" id="Footer-Email" required=""/><input type="submit" data-wait="Please wait..." class="footer-form-submit w-button" value="Submit"/></div><h6 class="heading-108 mb-none">DOWNLOAD THE APP</h6><div id="w-node-_1399634f-9759-29b9-70a4-7e01a07fda10-364723a9" class="w-layout-layout quick-stack-4 mb-none wf-layout-layout"><div id="playStore" class="w-layout-cell cell-10"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6742f8d31e5c164ac426cdef_logos_google-play-icon.svg" loading="lazy" width="16" alt=""/><div><h6 class="heading-81">GET IT ON</h6><h4 class="heading-82">Google Play</h4></div></div><div id="appleStore" class="w-layout-cell cell-10"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6742fc92d2b0777800f542a9_ic_baseline-apple.png" loading="lazy" width="20" alt=""/><div><h6 class="heading-81">Download on the</h6><h4 class="heading-82">App Store</h4></div></div></div></form><div class="w-form-done"><div>Thank you! Your submission has been received!</div></div><div class="w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div></div><div class="footer-bottom"><div class="footer-social-block-two"><a href="https://www.instagram.com/beerbiceps_skillhouse?igsh=eTg2a3B4dXoxODBp" class="footer-social-link w-inline-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6744abc0d780912d99a6e761_Frame%2026.svg" loading="lazy" alt="" class="image-117"/></a><a href="https://youtube.com/@beerbicepsskillhouse?si=KVyjKHjsP73qzvGQ" class="footer-social-link w-inline-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6744abd1bf26071c8ea4c6ef_Frame%2027.svg" loading="lazy" alt=""/></a><a href="https://www.linkedin.com/company/beerbiceps-skillhouse/" class="footer-social-link w-inline-block"><img src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/6744abe414de53835d343428_Group.svg" loading="lazy" alt=""/></a></div><div class="footer-copyright">Copyright © 2024 BeerBiceps SkillHouse. All Rights Reserved.</div></div></div></section><script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=65f02985a70b38d810964d03" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/js/webflow.schunk.86d8985fcdb425b7.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/js/webflow.schunk.c2aa238619ecee8d.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/js/webflow.schunk.81c4ce843f2a7706.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/js/webflow.schunk.749879b8b33b1518.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/js/webflow.schunk.f8a005e8c4615e4d.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/js/webflow.schunk.58d78bb00505e8dd.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/js/webflow.schunk.f57c4c4574bfea67.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/65f02985a70b38d810964d03/js/webflow.bc468f5e.60d483c4dd1d538f.js" type="text/javascript"></script><style>.team-slide-wrapper-2{
+cursor:pointer;
+}
+
+.over-fl-bd{
+  overflow-y: scroll; /* Ensure scrolling works while keeping fixed elements stable */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+}
+.nav-button-wrapper{
+margin-left:20px !important;
+}
+
+ .righttoleft {
+            animation: slide-right1 2s ease-in-out 1;
+              animation: slideIn 2s ease-out forwards;
+
+        }
+
+        @keyframes slide-right {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(200px); /* Adjust to desired distance */
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        
+        
+ #animated-text {
+    transform: translateY(50px); /* Start from below */
+  animation: slideIn 2s ease-out forwards;
+}
+
+
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  #animated-text1,#animated-text2,#animated-text3,#animated-text4,#animated-text5 {
+    opacity: 0;
+    transform: translateY(50px); /* Start from below */
+    transition: opacity 2s ease-out, transform 2s ease-out; /* Smooth animation */
+  }
+
+  #animated-text1.visible,#animated-text2.visible,#animated-text3.visible,#animated-text4.visible,#animated-text5.visible {
+    opacity: 1;
+    transform: translateY(0); /* Move to original position */
+  }
+
+
+
+.footer-link-two {
+    color: #ddd;
+    word-break: normal;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: dashed;
+    display: block; /* Ensure each link is treated as a block element */
+    position: relative;
+    padding-left: 16px; /* Space for the bullet */
+    margin-left: 20px;
+}
+.footer-link-two:hover{
+   color: #fff;
+}
+
+.footer-link-two::before {
+    content: '•'; /* Unicode bullet symbol */
+    color: #ddd; /* Match the text color */
+    position: absolute;
+    left: 0; /* Position the bullet */
+}
+
+
+.image-hover-effect1,.image-hover-effect2,.image-hover-effect3,.image-hover-effect4,.image-hover-effect5,.image-hover-effect6 {
+    transition: transform 0.3s ease-in-out; /* Smooth scaling effect */
+    transform-origin: bottom center; /* Fix the bottom of the image */
+}
+
+.rel-1:hover,.rel-2:hover,.rel-3:hover,.rel-4:hover,.rel-5:hover,.rel-6:hover{
+position:relative;
+}
+
+.rel-1:hover .image-hover-effect1,.rel-2:hover .image-hover-effect2,.rel-3:hover .image-hover-effect3,.rel-4:hover .image-hover-effect4,.rel-5:hover .image-hover-effect5,.rel-6:hover .image-hover-effect6 {
+    transform: scale(1.3); /* Increase size by 10% */
+}
+
+.cell-20 {
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition effect */
+}
+
+.cell-20:hover {
+    box-shadow: 
+        0px 10px 30px rgba(18, 18, 18, 0.2), 
+        0px 6px 15px rgba(18, 18, 18, 0.15), 
+        0px 3px 8px rgba(18, 18, 18, 0.1);
+}
+
+.zIndx{
+z-index:1000000000;
+}
+
+.image-120, .image-121, .image-122,.image-123,.image-124,.image-125,.image-126,.image-127,.image-128,.image-129,.image-130,.image-131 {
+  transition: transform 0.5s ease-in-out; /* Smooth transition on hover */
+  visibility:hidden;
+    opacity: 0; /* Set opacity to 0 for smooth fade-in effect */
+
+}
+
+/* Hover effect: Add shaking animation for left image */
+.rel-1:hover .image-120,.rel-2:hover .image-122,.rel-3:hover .image-124,.rel-4:hover .image-126,.rel-5:hover .image-128,.rel-6:hover .image-130 {
+  animation: shake-left 0.5s ease-in-out; /* Add shake animation */
+  visibility: visible; /* Make the image visible on hover */
+  opacity: 1; /* Fade in */
+}
+
+/* Hover effect: Add shaking animation for right image */
+.rel-1:hover .image-121,.rel-2:hover .image-123,.rel-3:hover .image-125,.rel-4:hover .image-127,.rel-5:hover .image-129,.rel-6:hover .image-131 {
+  animation: shake-right 0.5s ease-in-out; /* Add shake animation */
+    visibility: visible; /* Make the image visible on hover */
+  opacity: 1; /* Fade in */
+}
+
+
+
+/* Keyframes for shaking left image */
+@keyframes shake-left {
+  0%, 100% {
+    transform: translateX(0); /* No offset at start and end */
+  }
+  25% {
+    transform: translateX(10px); /* Move slightly right */
+  }
+  50% {
+    transform: translateX(-5px); /* Move slightly left */
+  }
+  75% {
+    transform: translateX(5px); /* Move slightly right */
+  }
+}
+
+/* Keyframes for shaking right image */
+@keyframes shake-right {
+  0%, 100% {
+    transform: translateX(0); /* No offset at start and end */
+  }
+  25% {
+    transform: translateX(-10px); /* Move slightly left */
+  }
+  50% {
+    transform: translateX(5px); /* Move slightly right */
+  }
+  75% {
+    transform: translateX(-5px); /* Move slightly left */
+  }
+}
+
+
+.fade {
+  animation: fadeEffect 1s ease-in-out;
+}
+
+@keyframes fadeEffect {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ds-none{
+display:none;
+}
+
+@media (max-width: 608px) {
+
+.team-block-3{
+        margin: 0px 5px;
+}
+
+.team-block-info-3{
+        height: 330px;
+}
+
+.nav-dropdown-icon-2{
+display:none
+}
+
+ .w--current {
+    color: #17555C; /* Retain color */
+    font-weight: 700; /* Retain font-weight */
+    margin-bottom: 0 !important; /* Reset margin */
+    padding-bottom: 0 !important; /* Reset padding */
+    position: static; /* Reset position */
+  }
+
+  .w--current::after {
+    content: none !important; /* Remove the ::after element on mobile */
+  }
+
+.nav-dropdown-list-2 a{
+color: #454545 !important;
+}
+.nav-button-wrapper{
+margin-left:0px !important;
+}
+
+.w-icon-dropdown-toggle,.text-block-135{
+    color: #DDD;
+}
+.bubble-img{
+display:none;}
+.mb-none{
+display:none;
+}
+.ds-none{
+display:block;
+}
+
+
+.image-hover-effect1,.image-hover-effect2,.image-hover-effect3,.image-hover-effect4,.image-hover-effect5,.image-hover-effect6 {
+    transform: scale(0.9); /* Increase size by 10% */
+
+}
+
+.rel-1:hover .image-hover-effect1,.rel-2:hover .image-hover-effect2,.rel-3:hover .image-hover-effect3,.rel-4:hover .image-hover-effect4,.rel-5:hover .image-hover-effect5,.rel-6:hover .image-hover-effect6 {
+    transform: scale(1.05); /* Increase size by 10% */
+    z-index:100000;
+}
+
+.nav-menu-2{
+padding:50px 0px 50px 0px;
+background:#17555C;
+    border-radius: 0px 0px 16px 16px;
+
+}
+
+.nav-menu-2 a,.text-block-134{
+color: #DDD;
+
+}
+
+.w--current {
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.nav-dropdown-toggle{
+padding-left:10px !important;
+}
+
+.footer-link-two{
+margin-left:10px;
+}
+
+.flx-mb{
+display:flex !important;
+}
+
+
+}
+
+.w--current {
+  color: #17555C;
+  margin-bottom: -10px;
+  padding-bottom: 20px;
+  font-weight: 700;
+  position: relative;
+}
+
+.w--current::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px; /* Adjust based on your image height */
+  background: url('https://cdn.prod.website-files.com/65f02985a70b38d810964d03/674da23ac254446032067c10_Rectangle%2023.svg') no-repeat center;
+  background-size: contain;
+}
+
+.footer-form-field::placeholder {
+  color: #BDBDBD;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+
+@media (max-width: 830px) and (min-width: 608px) {
+  .bubble-img {
+    display: none;
+  }
+  .tab-none {
+    display: none;
+  }
+  
+  .nav-button-wrapper{
+  margin-left:0px !important;
+  }
+}
+
+
+
+</style>
+
+</body></html>
